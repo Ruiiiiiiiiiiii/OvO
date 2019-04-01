@@ -28,6 +28,10 @@ public class Item {
         return model;
     }
 
+    public void setLock(boolean lock) {
+        this.lock = lock;
+    }
+
     public String getGood() {
         return good;
     }

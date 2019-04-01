@@ -37,6 +37,8 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
     private ArrayList<Item> mDatas;
     View view;
     AlertDialog dialog;
+    ViewHolder holders;
+    int positions;
     public VerticalPagerAdapter(Context mContext, ArrayList<Item> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -60,7 +62,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
                if (item.getId()=="123"){
                    Toast.makeText(mContext,"点击了文字",Toast.LENGTH_SHORT).show();
                }
-               else if (item.getId()=="figure"){
+               else if (item.getId()=="figure"&&item.isLock()){
                    onFingerprintClick(view);
                }
             }
@@ -72,6 +74,8 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holders = holder;
+        positions = position;
         holder.pagerContent.setVisibility(View.VISIBLE);
         holder.homeAdvertiseIv.setVisibility(View.GONE);
 
@@ -84,7 +88,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         if (item.getId()=="figure"&&item.isLock()){
             holder.contentTv.setText("您必须先验证指纹才能查看时间胶囊的内容");
         }
-        else           holder.contentTv.setText(mDatas.get(position).getContext());
+        else holder.contentTv.setText(mDatas.get(position).getContext());
 
         holder.typeTv.setText(mDatas.get(position).getType());
     }
@@ -196,8 +200,9 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
                 if (dialog != null  &&dialog.isShowing()){
                     dialog.dismiss();
                 }
+                mDatas.get(positions).setLock(false);
+                holders.contentTv.setText(mDatas.get(positions).getContext());
 
-                //TODO:
             }
         });
     }
