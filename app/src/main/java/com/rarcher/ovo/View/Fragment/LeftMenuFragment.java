@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.rarcher.ovo.Activities.History;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
 import com.rarcher.ovo.model.Event;
@@ -102,8 +103,8 @@ public class LeftMenuFragment extends Fragment {
                 startActivity(intent);*/
                 break;
             case R.id.calendar_tv:
-              /*  intent = new Intent(getActivity(), DailyActivity.class);
-                startActivity(intent);*/
+                intent = new Intent(getActivity(), History.class);
+                startActivity(intent);
                 break;
         }
     }
