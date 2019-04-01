@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.rarcher.ovo.Activities.SettingActivity;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
 import com.rarcher.ovo.model.Event;
@@ -77,9 +78,9 @@ public class RightMenuFragment extends Fragment {
                 RxBus.getInstance().postEvent(new Event(1000,"closeMenu"));
                 break;
             case R.id.setting:
-              /*  Intent intent = new Intent();
-                intent.setClass(getActivity(), SettingsActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), SettingActivity.class);
+                startActivity(intent);
                 break;
             case R.id.notification_tv:
                 break;
