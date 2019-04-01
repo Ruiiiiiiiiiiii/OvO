@@ -2,16 +2,22 @@ package com.rarcher.ovo.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.OrientationHelper;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
+import com.rarcher.ovo.View.Adapter.DataUtils;
+import com.rarcher.ovo.View.Adapter.VerticalPagerAdapter;
 import com.rarcher.ovo.View.Fragment.LeftMenuFragment;
 import com.rarcher.ovo.View.Fragment.RightMenuFragment;
-import com.rarcher.ovo.View.VerticalViewPager;
 import com.rarcher.ovo.model.Event;
-import butterknife.BindView;
+import com.rarcher.ovo.model.Item;
+import com.rarcher.ovo.widget.OnViewPagerListener;
+import com.rarcher.ovo.widget.PagerLayoutManager;
+import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -19,21 +25,45 @@ import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.view_pager)
-    VerticalViewPager viewPager;
     private long mLastClickTime;
     private SlidingMenu slidingMenu;
     private Subscription subscription;
     private LeftMenuFragment leftMenu;
     private RightMenuFragment rightMenu;
 
+
+    private ArrayList<Item> mDatas = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private VerticalPagerAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mian);
         ButterKnife.bind(this);
+        recyclerView = findViewById(R.id.recycler_view);
         initMenu();
-        initPage();
+        //initPage();
+        PagerLayoutManager mLayoutManager = new PagerLayoutManager(this, OrientationHelper.VERTICAL);
+        mDatas.addAll(DataUtils.getDatas());
+        mAdapter = new VerticalPagerAdapter(this, mDatas);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+        mLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
+            @Override
+            public void onInitComplete(View view) {
+            }
+            @Override
+            public void onPageSelected(int position, boolean isBottom, View view) {
+
+            }
+            @Override
+            public void onPageRelease(boolean isNext, int position, View view) {
+            }
+        });
+
+
+
     }
 
     private void initMenu() {
@@ -59,11 +89,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    private void initPage() {
-
-    }
-
 
 
     @Override

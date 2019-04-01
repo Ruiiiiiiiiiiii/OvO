@@ -6,8 +6,8 @@
     android:orientation="vertical"
     tools:context=".Activities.MainActivity">
 
-    <com.rarcher.ovo.View.VerticalViewPager
-        android:id="@+id/view_pager"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
