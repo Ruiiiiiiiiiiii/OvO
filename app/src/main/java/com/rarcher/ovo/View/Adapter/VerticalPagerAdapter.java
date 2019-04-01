@@ -1,12 +1,17 @@
 package com.rarcher.ovo.View.Adapter;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rarcher.ovo.R;
+import com.rarcher.ovo.Utils.FingerprintUtil;
 import com.rarcher.ovo.Utils.GlideApp;
+import com.rarcher.ovo.Utils.ScreenUtils;
 import com.rarcher.ovo.model.Item;
 
 import java.util.ArrayList;
@@ -28,7 +35,8 @@ import butterknife.BindView;
 public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Item> mDatas;
-
+    View view;
+    AlertDialog dialog;
     public VerticalPagerAdapter(Context mContext, ArrayList<Item> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -38,6 +46,10 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.fragment_main, parent, false);
+        view = LayoutInflater.from(mContext).inflate(R.layout.figure_dialog, null, false);
+        dialog = new AlertDialog.Builder(mContext).setView(view).create();
+        dialog.dismiss();
+        FingerprintUtil.context = mContext;
         final ViewHolder holder = new ViewHolder(v);
 
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +59,9 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
                Item item = mDatas.get(position);
                if (item.getId()=="123"){
                    Toast.makeText(mContext,"点击了文字",Toast.LENGTH_SHORT).show();
+               }
+               else if (item.getId()=="figure"){
+                   onFingerprintClick(view);
                }
             }
         });
@@ -63,9 +78,14 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         GlideApp.with(mContext).load(mDatas.get(position).getImageId()).centerCrop().into(holder.imageIv);
         holder.likeTv.setText(mDatas.get(position).getGood());
         holder.titleTv.setText(mDatas.get(position).getTitle());
-        holder.contentTv.setText(mDatas.get(position).getContext());
         holder.readcountTv.setText(mDatas.get(position).getReadcount());
         holder.commentTv.setText(mDatas.get(position).getComment());
+        Item item = mDatas.get(position);
+        if (item.getId()=="figure"&&item.isLock()){
+            holder.contentTv.setText("您必须先验证指纹才能查看时间胶囊的内容");
+        }
+        else           holder.contentTv.setText(mDatas.get(position).getContext());
+
         holder.typeTv.setText(mDatas.get(position).getType());
     }
 
@@ -122,5 +142,92 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
 
         }
     }
+
+
+
+    public void onFingerprintClick(View v){
+
+        FingerprintUtil.callFingerPrint(new FingerprintUtil.OnCallBackListenr() {
+
+            @Override
+            public void onSupportFailed() {
+                Toast.makeText(mContext,"当前设备不支持指纹",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onInsecurity() {
+                Toast.makeText(mContext,"当前设备未处于安全保护中",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onEnrollFailed() {
+
+                Toast.makeText(mContext,"请到设置中设置指纹",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationStart() {
+                showDialog();
+            }
+
+            @Override
+            public void onAuthenticationError(int errMsgId, CharSequence errString) {
+
+                Toast.makeText(mContext,errString.toString(),Toast.LENGTH_SHORT).show();
+                showAuthenticationScreen();
+                if (dialog != null  &&dialog.isShowing()){
+                    dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                Toast.makeText(mContext,"解锁失败",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
+                Toast.makeText(mContext,helpString.toString(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
+                Toast.makeText(mContext,"解锁成功",Toast.LENGTH_SHORT).show();
+                if (dialog != null  &&dialog.isShowing()){
+                    dialog.dismiss();
+                }
+
+                //TODO:
+            }
+        });
+    }
+    @TargetApi(23)
+
+    /**
+
+     * 锁屏密码
+
+     */
+
+    private void showAuthenticationScreen() {
+    }
+    //初始化并弹出对话框方法
+    private void showDialog() {
+
+        final Button cancel = view.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FingerprintUtil.cancel();
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
+        //此处设置位置窗体大小，我这里设置为了手机屏幕宽度的3/4  注意一定要在show方法调用后再写设置窗口大小的代码，否则不起效果会
+        dialog.getWindow().setLayout((ScreenUtils.getScreenWidth(mContext) / 4 * 3), LinearLayout.LayoutParams.WRAP_CONTENT);
+    }
+
+
 }
 

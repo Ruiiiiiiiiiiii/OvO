@@ -9,7 +9,7 @@ android {
     buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.rarcher.ovo"
-        minSdkVersion 15
+        minSdkVersion 23
         targetSdkVersion 27
         versionCode Integer.parseInt(version)
         versionName name

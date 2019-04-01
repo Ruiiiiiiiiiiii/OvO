@@ -16,6 +16,7 @@ public class Item {
     String readcount;//阅读
     String Comment;//评论
     String type;
+    boolean lock;//指纹解锁的是否上了锁
 
     public String getType() {
         return type;
@@ -59,7 +60,11 @@ public class Item {
         return imageId;
     }
 
-    public Item(String model, String good, String title, String uid, String context, String id, String readcount, String comment,String type, int imageId) {
+    public boolean isLock() {
+        return lock;
+    }
+
+    public Item(String model, String good, String title, String uid, String context, String id, String readcount, String comment, String type, boolean lock, int imageId) {
 
         this.model = model;
         this.good = good;
@@ -71,5 +76,6 @@ public class Item {
         Comment = comment;
         this.type = type;
         this.imageId = imageId;
+        this.lock = lock;
     }
 }
