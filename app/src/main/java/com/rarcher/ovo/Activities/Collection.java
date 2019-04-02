@@ -72,6 +72,8 @@ public class Collection extends AppCompatActivity {
                 refreshFruits();
             }
         });
+        
+
     }
     private void initDatas(){
         collection_beenList.clear();
