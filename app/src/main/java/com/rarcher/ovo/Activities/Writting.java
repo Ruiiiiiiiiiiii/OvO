@@ -54,7 +54,7 @@ public class Writting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 context = inputs.getText().toString();
-                LocalDB.insert_info(context,c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DATE),"时间旅行者",localDB);
+                LocalDB.insert_info(context,c.getTime().toString(),"时间旅行者",localDB);
                 Toast.makeText(getApplicationContext(),"时间旅行者已经上路啦!",Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -66,7 +66,7 @@ public class Writting extends AppCompatActivity {
     }
 
     private void init(){
-        fab= (FloatingActionButton) findViewById(R.id.fab);
+        fab=findViewById(R.id.fab);
         inputs = findViewById(R.id.inputs);
     }
 

@@ -73,8 +73,16 @@ public class Collection extends AppCompatActivity {
             }
         });
 
+        ;
+
+
 
     }
+
+
+
+
+
     private void initDatas(){
         collection_beenList.clear();
         query(localDB,collection_beenList);
