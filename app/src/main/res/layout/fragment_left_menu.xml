@@ -84,12 +84,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/column_ll"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50.0dip"
-        android:text="Powered by OvO"
+        android:layout_marginBottom="20dp"
+        android:text="Powered by 时生"
         android:textColor="#ff888888"
-        android:textSize="7.0sp" />
+        android:textSize="10.0sp" />
 
 
 </RelativeLayout>

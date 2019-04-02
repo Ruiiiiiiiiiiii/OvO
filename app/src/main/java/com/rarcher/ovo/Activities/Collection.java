@@ -72,7 +72,7 @@ public class Collection extends AppCompatActivity {
                 refreshFruits();
             }
         });
-        
+
 
     }
     private void initDatas(){
