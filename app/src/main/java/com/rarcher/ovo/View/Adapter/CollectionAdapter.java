@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -26,13 +27,13 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     private Context mContext;
     private List<Collection_been> collection_beenList;
     static class ViewHolder extends RecyclerView.ViewHolder {
-        CardView cardView;
+        RelativeLayout views;
         ImageView Image;
         TextView contexts;
         TextView author;
         public ViewHolder(View view) {
             super(view);
-            cardView = (CardView) view;
+            views = view.findViewById(R.id.type_container);
             Image = (ImageView) view.findViewById(R.id.image_iv);
             contexts = (TextView) view.findViewById(R.id.title_tv);
             author = view.findViewById(R.id.author_tv);
@@ -49,7 +50,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_art, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.views.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

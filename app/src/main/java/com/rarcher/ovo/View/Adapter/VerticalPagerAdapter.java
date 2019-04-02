@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rarcher.ovo.DB.LocalDB;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.FingerprintUtil;
 import com.rarcher.ovo.Utils.GlideApp;
@@ -39,6 +40,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
     AlertDialog dialog;
     ViewHolder holders;
     int positions;
+    private LocalDB localDB;
     public VerticalPagerAdapter(Context mContext, ArrayList<Item> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -47,6 +49,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        initDB();
         View v = LayoutInflater.from(mContext).inflate(R.layout.fragment_main, parent, false);
         view = LayoutInflater.from(mContext).inflate(R.layout.figure_dialog, null, false);
         dialog = new AlertDialog.Builder(mContext).setView(view).create();
@@ -60,7 +63,8 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
                int position = holder.getAdapterPosition();
                Item item = mDatas.get(position);
                if (item.getId()=="123"){
-                   Toast.makeText(mContext,"点击了文字",Toast.LENGTH_SHORT).show();
+                   LocalDB.insert_collection(item.getContext(),item.getAuthor(),item.getImageId(),localDB);
+                   Toast.makeText(mContext,"收藏成功",Toast.LENGTH_SHORT).show();
                }
                else if (item.getId()=="figure"&&item.isLock()){
                    onFingerprintClick(view);
@@ -147,7 +151,10 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         }
     }
 
-
+    private void initDB(){
+        localDB = new LocalDB(mContext,"Collection.db",null,2);
+        localDB.getWritableDatabase();
+    }
 
     public void onFingerprintClick(View v){
 

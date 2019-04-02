@@ -47,7 +47,6 @@ public class LocalDB extends SQLiteOpenHelper {
     public static void insert_info(String context, int year, int mouth, int day, String name, LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        final ByteArrayOutputStream os = new ByteArrayOutputStream();
         values.put("context", context);
         values.put("year", year);
         values.put("mouth",mouth);
@@ -55,6 +54,15 @@ public class LocalDB extends SQLiteOpenHelper {
         values.put("day", day);
         db.insert("History", null, values);
 
+    }
+
+    public static void insert_collection(String context,String author,int imageid,LocalDB dbhelper){
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("context", context);
+        values.put("author", author);
+        values.put("imageId",imageid);
+        db.insert("Collection", null, values);
     }
 
 
