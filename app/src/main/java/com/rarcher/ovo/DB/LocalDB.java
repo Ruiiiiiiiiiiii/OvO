@@ -94,29 +94,20 @@ public class LocalDB extends SQLiteOpenHelper {
         db.insert("Collection", null, values);
     }
 
-
-    public static History_Been query_user(LocalDB dbhelper) {
+    public static boolean  query_collection(String context,LocalDB dbhelper){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        Cursor cursor = db.query("History", null, null, null, null, null, null);
+
+        Cursor cursor = db.query("Collection", null, "context = ?",  new String[]{context}, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                String context = cursor.getString(cursor.getColumnIndex("context"));
-                int year = cursor.getInt(cursor.getColumnIndex("year"));
-                int mouth = cursor.getInt(cursor.getColumnIndex("mouth"));
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                int day = cursor.getInt(cursor.getColumnIndex("day"));
-                History_Been history_been = new History_Been(context, year, mouth, day,name);
-                return history_been;
+                return true;
             }
             while (cursor.moveToNext());
         }
-
         cursor.close();
-
-        return null;
-
-
+        return false;
     }
+
 
 
 }

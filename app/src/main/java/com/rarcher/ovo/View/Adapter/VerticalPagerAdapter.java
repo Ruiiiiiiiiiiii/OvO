@@ -63,8 +63,11 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
                int position = holder.getAdapterPosition();
                Item item = mDatas.get(position);
                if (item.getId()=="123"){
+                   if (LocalDB.query_collection(item.getContext(),localDB))
+                       Toast.makeText(mContext,"你已经收藏过咯",Toast.LENGTH_SHORT).show();
+                   else {
                    LocalDB.insert_collection(item.getContext(),item.getAuthor(),item.getImageId(),localDB);
-                   Toast.makeText(mContext,"收藏成功",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(mContext,"收藏成功",Toast.LENGTH_SHORT).show();}
                }
                else if (item.getId()=="figure"&&item.isLock()){
                    onFingerprintClick(view);
