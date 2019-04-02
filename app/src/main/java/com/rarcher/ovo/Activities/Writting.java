@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.rarcher.ovo.DB.LocalDB;
 import com.rarcher.ovo.R;
 
+import java.text.SimpleDateFormat;
+
 public class Writting extends AppCompatActivity {
     FloatingActionButton fab;
     String context;
@@ -54,7 +56,10 @@ public class Writting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 context = inputs.getText().toString();
-                LocalDB.insert_info(context,c.getTime().toString(),"时间旅行者",localDB);
+                //处理时间
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String times=sdf.format(c.getTime());
+                LocalDB.insert_info(context,times,"时间旅行者",localDB);
                 Toast.makeText(getApplicationContext(),"时间旅行者已经上路啦!",Toast.LENGTH_SHORT).show();
                 finish();
             }

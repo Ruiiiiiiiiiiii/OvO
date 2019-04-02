@@ -1,5 +1,7 @@
 package com.rarcher.ovo.Activities;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import com.rarcher.ovo.View.Adapter.ShadowTransformer;
 import com.rarcher.ovo.View.Been.CardItem;
 import com.rarcher.ovo.model.History_Been;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +37,16 @@ public class History extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         mCardAdapter = new CardPagerAdapter();
-        mCardAdapter.addCardItem(new CardItem(R.string.title_1, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_2, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_3, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_4, R.string.text_1));
 
+
+
+
+        mCardAdapter.addCardItem(new CardItem("时光", "记录美好的过去"));
+        query_date(localDB);
+         /* mCardAdapter.addCardItem(new CardItem(R.string.title_2, R.string.text_1));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_3, R.string.text_1));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_4, R.string.text_1))
+*/
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
         mCardShadowTransformer.enableScaling(true);
 
@@ -53,4 +61,21 @@ public class History extends AppCompatActivity {
         localDB = new LocalDB(getApplicationContext(),"History.db",null,2);
         localDB.getWritableDatabase();
     }
+    public  void  query_date(LocalDB dbhelper){
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        Cursor cursor = db.query("History", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                String date = cursor.getString(cursor.getColumnIndex("time"));
+                String context = cursor.getString(cursor.getColumnIndex("context"));
+                mCardAdapter.addCardItem(new CardItem(date,context));
+            }
+            while (cursor.moveToNext());
+        }
+        cursor.close();
+
+
+    }
+
+
 }

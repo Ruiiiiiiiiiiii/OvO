@@ -6,19 +6,19 @@ package com.rarcher.ovo.View.Been;
 
 public class CardItem {
 
-    private int mTextResource;
-    private int mTitleResource;
+    private String mTextResource;
+    private String mTitleResource;
 
-    public CardItem(int title, int text) {
+    public CardItem(String title, String text) {
         mTitleResource = title;
         mTextResource = text;
     }
 
-    public int getText() {
+    public String getText() {
         return mTextResource;
     }
 
-    public int getTitle() {
+    public String getTitle() {
         return mTitleResource;
     }
 }
