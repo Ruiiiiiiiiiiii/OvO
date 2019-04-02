@@ -15,6 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rarcher.ovo.Activities.History;
 import com.rarcher.ovo.R;
@@ -37,14 +38,6 @@ public class LeftMenuFragment extends Fragment {
     ImageView search;
     @BindView(R.id.home_page_tv)
     TextView homePageTv;
-    @BindView(R.id.words_tv)
-    TextView wordsTv;
-    @BindView(R.id.voice_tv)
-    TextView voiceTv;
-    @BindView(R.id.video_tv)
-    TextView videoTv;
-    @BindView(R.id.calendar_tv)
-    TextView calendarTv;
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
 
@@ -66,13 +59,10 @@ public class LeftMenuFragment extends Fragment {
 
     private void loadView() {
         mViewList.add(homePageTv);
-        mViewList.add(wordsTv);
-        mViewList.add(voiceTv);
-        mViewList.add(videoTv);
-        mViewList.add(calendarTv);
+
     }
 
-    @OnClick({R.id.right_slide_close, R.id.search, R.id.home_page_tv, R.id.words_tv, R.id.voice_tv, R.id.video_tv, R.id.calendar_tv})
+    @OnClick({R.id.right_slide_close, R.id.search, R.id.home_page_tv})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -82,30 +72,9 @@ public class LeftMenuFragment extends Fragment {
             case R.id.search:
                 break;
             case R.id.home_page_tv:
-                RxBus.getInstance().postEvent(new Event(1000, "closeMenu"));
+                Toast.makeText(getContext(),"星空",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.words_tv:
-              /*  intent = new Intent(getActivity(), ArtActivity.class);
-                intent.putExtra("mode",1);
-                intent.putExtra("title","文  字");
-                startActivity(intent);*/
-                break;
-            case R.id.voice_tv:
-               /* intent = new Intent(getActivity(), ArtActivity.class);
-                intent.putExtra("mode",3);
-                intent.putExtra("title","声  音");
-                startActivity(intent);*/
-                break;
-            case R.id.video_tv:
-               /* intent = new Intent(getActivity(), ArtActivity.class);
-                intent.putExtra("mode",2);
-                intent.putExtra("title","影  像");
-                startActivity(intent);*/
-                break;
-            case R.id.calendar_tv:
-                intent = new Intent(getActivity(), History.class);
-                startActivity(intent);
-                break;
+
         }
     }
 

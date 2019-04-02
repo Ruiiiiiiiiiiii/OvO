@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 
 import com.rarcher.ovo.R;
@@ -23,6 +24,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Random;
 
 
 import butterknife.ButterKnife;
@@ -34,7 +36,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
     // private VideoView videoView;
     private final int SPLASH_DISPLAY_LENGHT = 3000;
     private Handler handler;
-
+    private ImageView splashpic;
     private static final int PERMISSON_REQUESTCODE = 1;
     /**
      * 需要进行检测的权限数组
@@ -110,6 +112,10 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
             EasyPermissions.requestPermissions(this, "应用需要这些权限", PERMISSON_REQUESTCODE, needPermissions);
         } else {
             setContentView(R.layout.activity_splash);
+            splashpic=findViewById(R.id.splashpic);
+            setpic(splashpic);
+
+
             ButterKnife.bind(Splash.this);
             delaySplash();
 
@@ -130,6 +136,19 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
         }, SPLASH_DISPLAY_LENGHT);
 
     }
+
+    private void setpic(ImageView splashpic){
+        int[] data ={
+                R.drawable.splash1,
+                R.drawable.splash2,
+                R.drawable.splash3,
+                R.drawable.splash4
+        };
+        Random random = new Random();//默认构造方法
+        int i2 = random.nextInt(5);
+        splashpic.setImageResource(data[i2]);
+    }
+
 
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {

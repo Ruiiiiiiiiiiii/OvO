@@ -51,13 +51,13 @@
 
     <TextView
         android:id="@+id/notification_tv"
+        style="@style/MenuColunmStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_ll"
-        style="@style/MenuColunmStyle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41.0dip"
-        android:text="消   息" />
+        android:text="首    页" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,23 +71,23 @@
 
     <TextView
         android:id="@+id/download_tv"
+        style="@style/MenuColunmStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/favorites_tv"
         android:layout_centerHorizontal="true"
-        style="@style/MenuColunmStyle"
         android:layout_marginTop="18.0dip"
-        android:text="离   线" />
+        android:text="单向历" />
 
     <TextView
         android:id="@+id/note_tv"
+        style="@style/MenuColunmStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/download_tv"
         android:layout_centerHorizontal="true"
-        style="@style/MenuColunmStyle"
         android:layout_marginTop="18.0dip"
-        android:text="笔   记" />
+        android:text="平行世界" />
 
     <TextView
         android:id="@+id/msg_count_tv"

@@ -7,18 +7,21 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppThemeLaunch" parent="AppTheme">
-    </style>
+
+    <style name="AppThemeLaunch" parent="AppTheme"></style>
+
     <style name="MenuColunmStyle">
         <item name="android:textSize">40.0sp</item>
         <item name="android:textColor">#ffffffff</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="AppTheme.Splash">
         <item name="android:windowFullscreen">false</item>
 
     </style>
+
     <style name="SettingMenuTvStyle">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@color/setting_act_textcolor_common</item>
@@ -28,6 +31,7 @@
         <item name="android:layout_marginLeft">15.0dip</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
+
     <style name="SettingMenuRightStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -35,6 +39,7 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_alignParentRight">true</item>
     </style>
+
     <style name="LunarDialg" parent="AlertDialog.AppCompat.Light">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -45,4 +50,12 @@
     <style name="ButtonStyle" parent="Base.Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

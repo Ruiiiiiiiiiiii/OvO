@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rarcher.ovo.Activities.Splash">
-<ImageView
-    android:id="@+id/splashpic"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    tools:context="com.rarcher.ovo.Activities.Collection">
+
 </android.support.constraint.ConstraintLayout>

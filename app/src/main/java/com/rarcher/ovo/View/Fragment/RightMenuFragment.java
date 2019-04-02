@@ -17,7 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.rarcher.ovo.Activities.Collection;
+import com.rarcher.ovo.Activities.History;
 import com.rarcher.ovo.Activities.SettingActivity;
+import com.rarcher.ovo.Activities.Writting;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
 import com.rarcher.ovo.model.Event;
@@ -73,6 +76,7 @@ public class RightMenuFragment extends Fragment {
 
     @OnClick({R.id.right_slide_close, R.id.setting, R.id.notification_tv, R.id.favorites_tv, R.id.download_tv, R.id.note_tv})
     public void onClick(View view) {
+        Intent intents = new Intent();
         switch (view.getId()) {
             case R.id.right_slide_close:
                 RxBus.getInstance().postEvent(new Event(1000,"closeMenu"));
@@ -83,12 +87,19 @@ public class RightMenuFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.notification_tv:
+                RxBus.getInstance().postEvent(new Event(1000, "closeMenu"));
                 break;
             case R.id.favorites_tv:
+                intents = new Intent(getActivity(), Collection.class);
+                startActivity(intents);
                 break;
             case R.id.download_tv:
+                intents = new Intent(getActivity(), History.class);
+                startActivity(intents);
                 break;
             case R.id.note_tv:
+                intents = new Intent(getActivity(), Writting.class);
+                startActivity(intents);
                 break;
         }
     }

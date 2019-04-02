@@ -6,24 +6,24 @@ package com.rarcher.ovo.model;
 
 public class History_Been {
     String context;
-    String year;
-    String mouth;
-    String day;
+    int year;
+    int mouth;
+    int day;
     String name;
 
     public String getContext() {
         return context;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public String getMouth() {
+    public int getMouth() {
         return mouth;
     }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
@@ -31,7 +31,7 @@ public class History_Been {
         return name;
     }
 
-    public History_Been(String context, String year, String mouth, String day, String name) {
+    public History_Been(String context, int year, int mouth, int day, String name) {
 
         this.context = context;
         this.year = year;

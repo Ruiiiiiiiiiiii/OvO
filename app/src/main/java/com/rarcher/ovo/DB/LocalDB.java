@@ -18,9 +18,9 @@ public class LocalDB extends SQLiteOpenHelper {
 
             + "id integer primary key autoincrement," +
             "context text," +
-            "year text," +
-            "mouth text,"+
-            "day text," +
+            "year Integer," +
+            "mouth Integer,"+
+            "day Integer," +
             "name text) ";
 
     public LocalDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -36,7 +36,7 @@ public class LocalDB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public static void insert_info(String context, String year, String mouth, String day, String name, LocalDB dbhelper) {
+    public static void insert_info(String context, int year, int mouth, int day, String name, LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -49,17 +49,17 @@ public class LocalDB extends SQLiteOpenHelper {
 
     }
 
-    //查找本用户名,返回一个Uer类型
+
     public static History_Been query_user(LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query("History", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 String context = cursor.getString(cursor.getColumnIndex("context"));
-                String year = cursor.getString(cursor.getColumnIndex("year"));
-                String mouth = cursor.getString(cursor.getColumnIndex("mouth"));
+                int year = cursor.getInt(cursor.getColumnIndex("year"));
+                int mouth = cursor.getInt(cursor.getColumnIndex("mouth"));
                 String name = cursor.getString(cursor.getColumnIndex("name"));
-                String day = cursor.getString(cursor.getColumnIndex("day"));
+                int day = cursor.getInt(cursor.getColumnIndex("day"));
                 History_Been history_been = new History_Been(context, year, mouth, day,name);
                 return history_been;
             }
