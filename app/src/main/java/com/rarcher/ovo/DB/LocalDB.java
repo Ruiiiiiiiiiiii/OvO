@@ -23,16 +23,24 @@ public class LocalDB extends SQLiteOpenHelper {
             "day Integer," +
             "name text) ";
 
+    public static final String Creat_Collection = "create table Collection ("
+            + "id integer primary key autoincrement," +
+            "context text," +
+            "imageId Integer," +
+            "author text) ";
+
     public LocalDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Creat_Book);
+        db.execSQL(Creat_Collection);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists History");
+        db.execSQL("drop table if exists Collection");
         onCreate(db);
     }
 

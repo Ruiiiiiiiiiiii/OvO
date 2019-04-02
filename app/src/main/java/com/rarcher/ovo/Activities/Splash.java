@@ -145,7 +145,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
                 R.drawable.splash4
         };
         Random random = new Random();//默认构造方法
-        int i2 = random.nextInt(5);
+        int i2 = random.nextInt(4);
         splashpic.setImageResource(data[i2]);
     }
 
