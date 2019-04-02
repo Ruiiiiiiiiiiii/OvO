@@ -26,8 +26,6 @@ public class History extends AppCompatActivity {
 
     List<History_Been> history = new ArrayList<>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,25 +36,15 @@ public class History extends AppCompatActivity {
 
         mCardAdapter = new CardPagerAdapter();
 
-
-
-
         mCardAdapter.addCardItem(new CardItem("时光", "记录美好的过去"));
         query_date(localDB);
-         /* mCardAdapter.addCardItem(new CardItem(R.string.title_2, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_3, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_4, R.string.text_1))
-*/
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
         mCardShadowTransformer.enableScaling(true);
 
         mViewPager.setAdapter(mCardAdapter);
         mViewPager.setPageTransformer(false, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);
-
-
     }
-
     private void initDB(){
         localDB = new LocalDB(getApplicationContext(),"History.db",null,2);
         localDB.getWritableDatabase();
@@ -73,9 +61,5 @@ public class History extends AppCompatActivity {
             while (cursor.moveToNext());
         }
         cursor.close();
-
-
     }
-
-
 }
