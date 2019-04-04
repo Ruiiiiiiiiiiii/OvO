@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 /*
 * 显示历史时光胶囊,注意,初始化的时候检测一下时间,如果是今天的不要加入这个历史列表!!!!!!!
 * */
@@ -48,11 +49,13 @@ public class History extends AppCompatActivity {
         mViewPager.setPageTransformer(false, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);
     }
-    private void initDB(){
-        localDB = new LocalDB(getApplicationContext(),"History.db",null,2);
+
+    private void initDB() {
+        localDB = new LocalDB(getApplicationContext(), "History.db", null, 2);
         localDB.getWritableDatabase();
     }
-    public  void  query_date(LocalDB dbhelper) {
+
+    public void query_date(LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query("History", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -70,7 +73,7 @@ public class History extends AppCompatActivity {
                 String date = "2017-07-17";
                 System.out.println("compareToBefore1 : "+date.compareTo("2017-06-16"));
                 * */
-                mCardAdapter.addCardItem(new CardItem(date,context));
+                mCardAdapter.addCardItem(new CardItem(date, context));
             }
             while (cursor.moveToNext());
         }

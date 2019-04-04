@@ -34,6 +34,7 @@ public class Collection extends AppCompatActivity {
     private CollectionAdapter adapter;
     private SwipeRefreshLayout swipeRefresh;
     private LocalDB localDB;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -44,6 +45,7 @@ public class Collection extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +57,9 @@ public class Collection extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+            actionBar.setDisplayHomeAsUpEnabled(true);}
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this );
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
 
@@ -72,21 +73,14 @@ public class Collection extends AppCompatActivity {
                 refreshFruits();
             }
         });
-
-        ;
-
-
-
     }
 
 
-
-
-
-    private void initDatas(){
+    private void initDatas() {
         collection_beenList.clear();
-        query(localDB,collection_beenList);
+        query(localDB, collection_beenList);
     }
+
     private void refreshFruits() {
         new Thread(new Runnable() {
             @Override
@@ -108,11 +102,12 @@ public class Collection extends AppCompatActivity {
         }).start();
     }
 
-    private void initDB(){
-        localDB = new LocalDB(getApplicationContext(),"Collection.db",null,2);
+    private void initDB() {
+        localDB = new LocalDB(getApplicationContext(), "Collection.db", null, 2);
         localDB.getWritableDatabase();
     }
-    public static void query(LocalDB dbhelper,List<Collection_been> list) {
+
+    public static void query(LocalDB dbhelper, List<Collection_been> list) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query("Collection", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -120,7 +115,7 @@ public class Collection extends AppCompatActivity {
                 String context = cursor.getString(cursor.getColumnIndex("context"));
                 String name = cursor.getString(cursor.getColumnIndex("author"));
                 int imageid = cursor.getInt(cursor.getColumnIndex("imageId"));
-                Collection_been collection_been = new Collection_been(context,name,imageid);
+                Collection_been collection_been = new Collection_been(context, name, imageid);
                 list.add(collection_been);
             }
             while (cursor.moveToNext());

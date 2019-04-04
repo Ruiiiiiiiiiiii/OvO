@@ -1,11 +1,15 @@
 package com.rarcher.ovo.Activities;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
@@ -17,7 +21,9 @@ import com.rarcher.ovo.model.Event;
 import com.rarcher.ovo.model.Item;
 import com.rarcher.ovo.widget.OnViewPagerListener;
 import com.rarcher.ovo.widget.PagerLayoutManager;
+
 import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -31,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private LeftMenuFragment leftMenu;
     private RightMenuFragment rightMenu;
 
-
     private ArrayList<Item> mDatas = new ArrayList<>();
     private RecyclerView recyclerView;
     private VerticalPagerAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,28 +48,29 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         recyclerView = findViewById(R.id.recycler_view);
         initMenu();
-        //initPage();
         PagerLayoutManager mLayoutManager = new PagerLayoutManager(this, OrientationHelper.VERTICAL);
         mDatas.addAll(DataUtils.getDatas());
         mAdapter = new VerticalPagerAdapter(this, mDatas);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 
+
+
+
+
         mLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
             @Override
             public void onInitComplete(View view) {
             }
+
             @Override
             public void onPageSelected(int position, boolean isBottom, View view) {
-
             }
+
             @Override
             public void onPageRelease(boolean isNext, int position, View view) {
             }
         });
-
-
-
     }
 
     private void initMenu() {
@@ -90,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
     @Override
     public void onBackPressed() {
         if (slidingMenu.isMenuShowing() || slidingMenu.isSecondaryMenuShowing()) {
@@ -102,9 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 mLastClickTime = System.currentTimeMillis();
                 Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
             }
-
         }
-
     }
 
     @OnClick({R.id.left_slide, R.id.right_slide})
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (subscription.isUnsubscribed()){
+        if (subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
         super.onDestroy();

@@ -71,7 +71,7 @@ public class FingerprintUtil {
 
     }
 
-   public interface OnCallBackListenr {
+    public interface OnCallBackListenr {
         void onSupportFailed();
 
         void onInsecurity();

@@ -3,6 +3,7 @@ package com.rarcher.ovo.model;
 /**
  * Created by 25532 on 2019/4/1.
  */
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -74,7 +75,7 @@ public class Item {
         return lock;
     }
 
-    public Item(String model, String good, String title, String uid, String context, String id, String readcount, String comment, String type, boolean lock, int imageId,String author) {
+    public Item(String model, String good, String title, String uid, String context, String id, String readcount, String comment, String type, boolean lock, int imageId, String author) {
 
         this.model = model;
         this.good = good;

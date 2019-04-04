@@ -35,7 +35,8 @@
             android:name=".Activities.Writting"
             android:label="@string/title_activity_writting"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Activities.DetailsActivity"></activity>
+        <activity android:name=".Activities.DetailsActivity" />
+        <activity android:name=".Activities.SeeTheWorld"></activity>
     </application>
 
 </manifest>

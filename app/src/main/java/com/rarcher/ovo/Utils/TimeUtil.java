@@ -8,30 +8,26 @@ import java.util.Locale;
 /**
  */
 public class TimeUtil {
-    public static long getCurrentSeconds(){
-        long ls = System.currentTimeMillis()/1000;
+    public static long getCurrentSeconds() {
+        long ls = System.currentTimeMillis() / 1000;
         return ls;
     }
-    public static String[] getCalendarShowTime(long paramLong)
-    {
+
+    public static String[] getCalendarShowTime(long paramLong) {
         String[] localObject;
         String str = new SimpleDateFormat("yyyy:MMM:d", Locale.ENGLISH).format(new Date(paramLong));
-        try
-        {
+        try {
             String[] arrayOfString = str.split(":");
             localObject = arrayOfString;
-            if ((localObject != null) && (localObject.length == 3));
+            if ((localObject != null) && (localObject.length == 3)) ;
             return localObject;
-        }
-        catch (Exception localException)
-        {
+        } catch (Exception localException) {
             while (true)
                 localException.printStackTrace();
         }
     }
 
-    public static String[] getCalendarShowTime(String paramString)
-    {
+    public static String[] getCalendarShowTime(String paramString) {
         try {
             long l = Long.valueOf(paramString);
             Calendar localCalendar = Calendar.getInstance();
@@ -42,7 +38,8 @@ public class TimeUtil {
         }
         return null;
     }
-    public static String getDate(String formate){
+
+    public static String getDate(String formate) {
         String str = new SimpleDateFormat(formate, Locale.ENGLISH).format(new Date());
         return str;
     }

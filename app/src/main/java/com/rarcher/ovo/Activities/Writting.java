@@ -24,7 +24,7 @@ public class Writting extends AppCompatActivity {
     String context;
     EditText inputs;
     private LocalDB localDB;
-    Calendar c=Calendar.getInstance();
+    Calendar c = Calendar.getInstance();
 
 
     @Override
@@ -37,6 +37,7 @@ public class Writting extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,20 +59,21 @@ public class Writting extends AppCompatActivity {
                 context = inputs.getText().toString();
                 //处理时间
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String times=sdf.format(c.getTime());
-                LocalDB.insert_info(context,times,"时间旅行者",localDB);
-                Toast.makeText(getApplicationContext(),"时间旅行者已经上路啦!",Toast.LENGTH_SHORT).show();
+                String times = sdf.format(c.getTime());
+                LocalDB.insert_info(context, times, "时间旅行者", localDB);
+                Toast.makeText(getApplicationContext(), "时间旅行者已经上路啦!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
     }
-    private void initDB(){
-        localDB = new LocalDB(getApplicationContext(),"History.db",null,2);
+
+    private void initDB() {
+        localDB = new LocalDB(getApplicationContext(), "History.db", null, 2);
         localDB.getWritableDatabase();
     }
 
-    private void init(){
-        fab=findViewById(R.id.fab);
+    private void init() {
+        fab = findViewById(R.id.fab);
         inputs = findViewById(R.id.inputs);
     }
 

@@ -29,16 +29,18 @@ import java.util.List;
  * Created by 25532 on 2019/4/2.
  */
 
-public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder>  {
+public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> {
     private static final String TAG = "CollectionAdapter";
     private Context mContext;
     private List<Collection_been> collection_beenList;
     private LocalDB localDB;
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout views;
         ImageView Image;
         TextView contexts;
         TextView author;
+
         public ViewHolder(View view) {
             super(view);
             views = view.findViewById(R.id.type_container);
@@ -47,6 +49,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             author = view.findViewById(R.id.author_tv);
         }
     }
+
     public CollectionAdapter(List<Collection_been> list) {
         collection_beenList = list;
     }
@@ -57,7 +60,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_art, parent, false);
-        localDB = new LocalDB(view.getContext(),"Collection.db",null,2);
+        localDB = new LocalDB(view.getContext(), "Collection.db", null, 2);
         localDB.getWritableDatabase();
         final ViewHolder holder = new ViewHolder(view);
         holder.views.setOnClickListener(new View.OnClickListener() {
@@ -95,16 +98,17 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
                 builder.show();
 
 
-
                 return true;
             }
         });
         return holder;
     }
-    private void delete(String context){
+
+    private void delete(String context) {
         SQLiteDatabase db = localDB.getWritableDatabase();
-        db.delete("Collection", "context = ?", new String[] { context });
+        db.delete("Collection", "context = ?", new String[]{context});
     }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Collection_been collection = collection_beenList.get(position);

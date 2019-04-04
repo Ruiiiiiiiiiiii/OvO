@@ -1,12 +1,16 @@
 package com.rarcher.ovo.View.Fragment;
 
-
-import android.app.usage.UsageEvents;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
@@ -17,9 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rarcher.ovo.Activities.History;
+import com.rarcher.ovo.Activities.SeeTheWorld;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
+import com.rarcher.ovo.View.Magnifier;
+import com.rarcher.ovo.View.MatrixImageView;
 import com.rarcher.ovo.model.Event;
 
 import java.util.ArrayList;
@@ -29,9 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- */
-public class LeftMenuFragment extends Fragment {
+
+public class LeftMenuFragment extends Fragment  {
     @BindView(R.id.right_slide_close)
     ImageView rightSlideClose;
     @BindView(R.id.search)
@@ -41,7 +46,9 @@ public class LeftMenuFragment extends Fragment {
     @BindView(R.id.title_bar)
     RelativeLayout titleBar;
 
+
     private List<View> mViewList = new ArrayList();
+
 
     @Nullable
     @Override
@@ -60,11 +67,12 @@ public class LeftMenuFragment extends Fragment {
     private void loadView() {
         mViewList.add(homePageTv);
 
+
     }
+
 
     @OnClick({R.id.right_slide_close, R.id.search, R.id.home_page_tv})
     public void onClick(View view) {
-        Intent intent;
         switch (view.getId()) {
             case R.id.right_slide_close:
                 RxBus.getInstance().postEvent(new Event(1000, "closeMenu"));
@@ -72,11 +80,13 @@ public class LeftMenuFragment extends Fragment {
             case R.id.search:
                 break;
             case R.id.home_page_tv:
-                Toast.makeText(getContext(),"星空",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), SeeTheWorld.class);
+                startActivity(intent);
+                Toast.makeText(getContext(), "星空", Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
+
 
     public void startAnim() {
         startIconAnim(search);
@@ -104,4 +114,7 @@ public class LeftMenuFragment extends Fragment {
         localScaleAnimation = new ScaleAnimation(1.0F, 0.5F, 1.0F, 0.5F, f1, f2);
         localScaleAnimation.setInterpolator(new BounceInterpolator());
     }
+
+
+
 }

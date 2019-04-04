@@ -53,26 +53,22 @@ public class DetailsActivity extends AppCompatActivity {
     ImageView homeAdvertiseIv;
     @BindView(R.id.pager_content)
     RelativeLayout pagerContent;
-    String TAG ="DetailsActivity";
+    String TAG = "DetailsActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
-        Log.d(TAG, "onCreate: "+Details_static.getContext());
-        Log.d(TAG, "onCreate: "+Details_static.getAuthor());
-        Log.d(TAG, "onCreate: "+Details_static.getSourse());
+        Log.d(TAG, "onCreate: " + Details_static.getContext());
+        Log.d(TAG, "onCreate: " + Details_static.getAuthor());
+        Log.d(TAG, "onCreate: " + Details_static.getSourse());
         contentTv.setText(Details_static.getContext());
-        Log.d(TAG, "onCreate: "+contentTv.getText().toString());
+        Log.d(TAG, "onCreate: " + contentTv.getText().toString());
         authorTv.setText(Details_static.getAuthor());
         imageIv.setImageResource(Details_static.getSourse());
 
     }
-
-
-
-
-
 
 
 }

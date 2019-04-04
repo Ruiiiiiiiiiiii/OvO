@@ -24,7 +24,7 @@ public class LocalDB extends SQLiteOpenHelper {
             "context text," +
             "time text," +
             "name text) ";
-    public static final String Creat_Image= "create table Image ("
+    public static final String Creat_Image = "create table Image ("
             + "id integer primary key autoincrement," +
             "image Blob) ";
 
@@ -37,12 +37,14 @@ public class LocalDB extends SQLiteOpenHelper {
     public LocalDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Creat_Book);
         db.execSQL(Creat_Collection);
         db.execSQL(Creat_Image);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists History");
@@ -51,7 +53,7 @@ public class LocalDB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public static void insert_info(String context,String time, String name, LocalDB dbhelper) {
+    public static void insert_info(String context, String time, String name, LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("context", context);
@@ -60,7 +62,7 @@ public class LocalDB extends SQLiteOpenHelper {
         db.insert("History", null, values);
     }
 
-    public static void insert_image( Bitmap bmp,LocalDB dbhelper) {
+    public static void insert_image(Bitmap bmp, LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, os);
@@ -69,7 +71,7 @@ public class LocalDB extends SQLiteOpenHelper {
         db.insert("Image", null, values);
     }
 
-    public static ByteArrayInputStream query_image(LocalDB dbhelper){
+    public static ByteArrayInputStream query_image(LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query("Image", null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -85,19 +87,19 @@ public class LocalDB extends SQLiteOpenHelper {
     }
 
 
-    public static void insert_collection(String context,String author,int imageid,LocalDB dbhelper){
+    public static void insert_collection(String context, String author, int imageid, LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("context", context);
         values.put("author", author);
-        values.put("imageId",imageid);
+        values.put("imageId", imageid);
         db.insert("Collection", null, values);
     }
 
-    public static boolean  query_collection(String context,LocalDB dbhelper){
+    public static boolean query_collection(String context, LocalDB dbhelper) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
 
-        Cursor cursor = db.query("Collection", null, "context = ?",  new String[]{context}, null, null, null);
+        Cursor cursor = db.query("Collection", null, "context = ?", new String[]{context}, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 return true;
@@ -107,7 +109,6 @@ public class LocalDB extends SQLiteOpenHelper {
         cursor.close();
         return false;
     }
-
 
 
 }

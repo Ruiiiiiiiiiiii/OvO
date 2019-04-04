@@ -48,7 +48,7 @@ import java.util.Comparator;
 
 /**
  */
-public class VerticalViewPager extends ViewGroup{
+public class VerticalViewPager extends ViewGroup {
     private static final String TAG = "ViewPager";
     private static final boolean DEBUG = false;
 

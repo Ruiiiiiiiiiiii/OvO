@@ -1,7 +1,6 @@
 package com.rarcher.ovo.View.Fragment;
 
 
-
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
@@ -87,35 +86,37 @@ public class RightMenuFragment extends Fragment {
         loadView();
         return view;
     }
+
     private void loadView() {
         mViewList.add(notificationTv);
         mViewList.add(favoritesTv);
         mViewList.add(downloadTv);
         mViewList.add(noteTv);
         ByteArrayInputStream s = LocalDB.query_image(localDB);
-        if (s!=null)
-        avaterIv.setImageDrawable(Drawable.createFromStream(s, "img"));
+        if (s != null)
+            avaterIv.setImageDrawable(Drawable.createFromStream(s, "img"));
         else ;
 
 
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
-    private void initdb(){
-        localDB = new LocalDB(getContext(),"Image.db",null,2);
+    private void initdb() {
+        localDB = new LocalDB(getContext(), "Image.db", null, 2);
         localDB.getWritableDatabase();
     }
 
 
-    @OnClick({R.id.right_slide_close, R.id.setting, R.id.notification_tv, R.id.favorites_tv, R.id.download_tv, R.id.note_tv,R.id.avater_iv})
+    @OnClick({R.id.right_slide_close, R.id.setting, R.id.notification_tv, R.id.favorites_tv, R.id.download_tv, R.id.note_tv, R.id.avater_iv})
     public void onClick(View view) {
         Intent intents;
         switch (view.getId()) {
             case R.id.right_slide_close:
-                RxBus.getInstance().postEvent(new Event(1000,"closeMenu"));
+                RxBus.getInstance().postEvent(new Event(1000, "closeMenu"));
                 break;
             case R.id.setting:
                 Intent intent = new Intent();
@@ -147,6 +148,7 @@ public class RightMenuFragment extends Fragment {
                 break;
         }
     }
+
     public void startAnim() {
         startIconAnim(rightSlideClose);
         startIconAnim(setting);
@@ -156,10 +158,10 @@ public class RightMenuFragment extends Fragment {
     private void startColumnAnim() {
         TranslateAnimation localTranslateAnimation = new TranslateAnimation(0F, 0.0F, 0.0F, 0.0F);
         localTranslateAnimation.setDuration(700L);
-        for (int j=0;j<mViewList.size();j++){
+        for (int j = 0; j < mViewList.size(); j++) {
             View localView = this.mViewList.get(j);
             localView.startAnimation(localTranslateAnimation);
-            localTranslateAnimation = new TranslateAnimation(j * 35,0.0F, 0.0F, 0.0F);
+            localTranslateAnimation = new TranslateAnimation(j * 35, 0.0F, 0.0F, 0.0F);
             localTranslateAnimation.setDuration(700L);
         }
     }
@@ -268,7 +270,7 @@ public class RightMenuFragment extends Fragment {
     private void displayImage(String imagePath) {
         if (imagePath != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            LocalDB.insert_image(bitmap,localDB);
+            LocalDB.insert_image(bitmap, localDB);
             avaterIv.setImageBitmap(bitmap);
         } else {
             Toast.makeText(getContext(), "failed to get image", Toast.LENGTH_SHORT).show();

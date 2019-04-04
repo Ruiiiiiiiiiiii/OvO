@@ -41,6 +41,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
     ViewHolder holders;
     int positions;
     private LocalDB localDB;
+
     public VerticalPagerAdapter(Context mContext, ArrayList<Item> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
@@ -60,18 +61,18 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               int position = holder.getAdapterPosition();
-               Item item = mDatas.get(position);
-               if (item.getId()=="123"){
-                   if (LocalDB.query_collection(item.getContext(),localDB))
-                       Toast.makeText(mContext,"你已经收藏过咯",Toast.LENGTH_SHORT).show();
-                   else {
-                   LocalDB.insert_collection(item.getContext(),item.getAuthor(),item.getImageId(),localDB);
-                   Toast.makeText(mContext,"收藏成功",Toast.LENGTH_SHORT).show();}
-               }
-               else if (item.getId()=="figure"&&item.isLock()){
-                   onFingerprintClick(view);
-               }
+                int position = holder.getAdapterPosition();
+                Item item = mDatas.get(position);
+                if (item.getId() == "123") {
+                    if (LocalDB.query_collection(item.getContext(), localDB))
+                        Toast.makeText(mContext, "你已经收藏过咯", Toast.LENGTH_SHORT).show();
+                    else {
+                        LocalDB.insert_collection(item.getContext(), item.getAuthor(), item.getImageId(), localDB);
+                        Toast.makeText(mContext, "收藏成功", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (item.getId() == "figure" && item.isLock()) {
+                    onFingerprintClick(view);
+                }
             }
         });
 
@@ -92,10 +93,9 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         holder.readcountTv.setText(mDatas.get(position).getReadcount());
         holder.commentTv.setText(mDatas.get(position).getComment());
         Item item = mDatas.get(position);
-        if (item.getId()=="figure"&&item.isLock()){
+        if (item.getId() == "figure" && item.isLock()) {
             holder.contentTv.setText("您必须先验证指纹才能查看时间胶囊的内容");
-        }
-        else holder.contentTv.setText(mDatas.get(position).getContext());
+        } else holder.contentTv.setText(mDatas.get(position).getContext());
 
         holder.typeTv.setText(mDatas.get(position).getType());
     }
@@ -105,7 +105,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         return mDatas.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.image_iv)
         ImageView imageIv;
         @BindView(R.id.type_container)
@@ -154,29 +154,29 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
         }
     }
 
-    private void initDB(){
-        localDB = new LocalDB(mContext,"Collection.db",null,2);
+    private void initDB() {
+        localDB = new LocalDB(mContext, "Collection.db", null, 2);
         localDB.getWritableDatabase();
     }
 
-    public void onFingerprintClick(View v){
+    public void onFingerprintClick(View v) {
 
         FingerprintUtil.callFingerPrint(new FingerprintUtil.OnCallBackListenr() {
 
             @Override
             public void onSupportFailed() {
-                Toast.makeText(mContext,"当前设备不支持指纹",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "当前设备不支持指纹", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onInsecurity() {
-                Toast.makeText(mContext,"当前设备未处于安全保护中",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "当前设备未处于安全保护中", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onEnrollFailed() {
 
-                Toast.makeText(mContext,"请到设置中设置指纹",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请到设置中设置指纹", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -187,27 +187,27 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
             @Override
             public void onAuthenticationError(int errMsgId, CharSequence errString) {
 
-                Toast.makeText(mContext,errString.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, errString.toString(), Toast.LENGTH_SHORT).show();
                 showAuthenticationScreen();
-                if (dialog != null  &&dialog.isShowing()){
+                if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
             }
 
             @Override
             public void onAuthenticationFailed() {
-                Toast.makeText(mContext,"解锁失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "解锁失败", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-                Toast.makeText(mContext,helpString.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, helpString.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-                Toast.makeText(mContext,"解锁成功",Toast.LENGTH_SHORT).show();
-                if (dialog != null  &&dialog.isShowing()){
+                Toast.makeText(mContext, "解锁成功", Toast.LENGTH_SHORT).show();
+                if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
                 mDatas.get(positions).setLock(false);
@@ -216,6 +216,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
             }
         });
     }
+
     @TargetApi(23)
 
     /**
@@ -226,6 +227,7 @@ public class VerticalPagerAdapter extends RecyclerView.Adapter<VerticalPagerAdap
 
     private void showAuthenticationScreen() {
     }
+
     //初始化并弹出对话框方法
     private void showDialog() {
 

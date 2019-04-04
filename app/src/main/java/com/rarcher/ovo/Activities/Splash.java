@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class Splash extends AppCompatActivity implements  EasyPermissions.PermissionCallbacks{
+public class Splash extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     // private VideoView videoView;
     private final int SPLASH_DISPLAY_LENGHT = 3000;
@@ -46,6 +46,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.READ_PHONE_STATE
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -73,11 +74,13 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
 
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
         requestCodePermissions();
     }
+
     @Override
     public void onBackPressed() {
         //do nothing
@@ -97,6 +100,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     /**
      * 申请权限结果的回调方法
      */
@@ -112,7 +116,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
             EasyPermissions.requestPermissions(this, "应用需要这些权限", PERMISSON_REQUESTCODE, needPermissions);
         } else {
             setContentView(R.layout.activity_splash);
-            splashpic=findViewById(R.id.splashpic);
+            splashpic = findViewById(R.id.splashpic);
             setpic(splashpic);
 
 
@@ -122,6 +126,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
 
         }
     }
+
     private void delaySplash() {
 
         handler = new Handler();
@@ -137,8 +142,8 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
 
     }
 
-    private void setpic(ImageView splashpic){
-        int[] data ={
+    private void setpic(ImageView splashpic) {
+        int[] data = {
                 R.drawable.splash1,
                 R.drawable.splash2,
                 R.drawable.splash3,
@@ -211,6 +216,7 @@ public class Splash extends AppCompatActivity implements  EasyPermissions.Permis
             e.printStackTrace();
         }
     }
+
     /**
      * 启动应用的设置
      */

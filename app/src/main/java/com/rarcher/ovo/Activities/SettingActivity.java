@@ -1,6 +1,5 @@
 package com.rarcher.ovo.Activities;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -10,15 +9,11 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-
-
 import com.bumptech.glide.Glide;
 import com.rarcher.ovo.BuildConfig;
 import com.rarcher.ovo.R;
-
 import java.io.File;
 import java.text.DecimalFormat;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,6 +23,7 @@ import butterknife.OnClick;
  * DATE 2016/8/15
  * owspace
  */
+
 public class SettingActivity extends AppCompatActivity {
     @BindView(R.id.toolBar)
     Toolbar toolBar;
