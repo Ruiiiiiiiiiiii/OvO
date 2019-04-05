@@ -62,7 +62,7 @@ public class History extends AppCompatActivity {
             do {
                 String date = cursor.getString(cursor.getColumnIndex("time"));
                 String context = cursor.getString(cursor.getColumnIndex("context"));
-                //字符串解析为Date对象,用于比较时间
+                //TODO:字符串解析为Date对象,用于比较时间
                 /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date date1 =sdf.parse(date);*/
 

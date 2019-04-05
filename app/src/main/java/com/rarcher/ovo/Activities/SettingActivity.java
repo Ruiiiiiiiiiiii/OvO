@@ -62,6 +62,7 @@ public class SettingActivity extends AppCompatActivity {
         DecimalFormat fnum = new DecimalFormat("##0.00");
         String dd = fnum.format(getDirSize(file));
         cacheSize.setText(dd + "M");
+
     }
 
     private float getDirSize(File file) {

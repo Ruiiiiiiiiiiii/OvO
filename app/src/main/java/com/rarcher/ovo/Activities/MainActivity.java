@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private Subscription subscription;
     private LeftMenuFragment leftMenu;
     private RightMenuFragment rightMenu;
-
     private ArrayList<Item> mDatas = new ArrayList<>();
     private RecyclerView recyclerView;
     private VerticalPagerAdapter mAdapter;
@@ -49,7 +48,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         initMenu();
         PagerLayoutManager mLayoutManager = new PagerLayoutManager(this, OrientationHelper.VERTICAL);
+
+        //TODO:
         mDatas.addAll(DataUtils.getDatas());
+
+
         mAdapter = new VerticalPagerAdapter(this, mDatas);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);

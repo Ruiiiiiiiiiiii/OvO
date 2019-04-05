@@ -1,16 +1,10 @@
 package com.rarcher.ovo.View.Fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.graphics.PointF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
@@ -20,17 +14,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.rarcher.ovo.Activities.SeeTheWorld;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.Utils.tools.RxBus;
-import com.rarcher.ovo.View.Magnifier;
-import com.rarcher.ovo.View.MatrixImageView;
 import com.rarcher.ovo.model.Event;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
