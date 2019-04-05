@@ -14,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import com.rarcher.ovo.R;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by 25532 on 2019/4/4.
  */
@@ -87,6 +89,8 @@ public class Magnifier extends View {
         mCurrentY += lasty+y;
         lastx +=lastx+x;
         lasty +=lasty+y;
+        Log.d(TAG, "setchange: lastx"+lastx);
+        Log.d(TAG, "setchange: lasty"+lasty);
         if (mCurrentX+RADIUS > bitmap.getWidth()) {
             mCurrentX = bitmap.getWidth()-RADIUS;
         } else if (mCurrentX-RADIUS <0 ) {

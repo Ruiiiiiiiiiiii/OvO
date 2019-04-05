@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -51,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO:
         mDatas.addAll(DataUtils.getDatas());
-
-
         mAdapter = new VerticalPagerAdapter(this, mDatas);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
