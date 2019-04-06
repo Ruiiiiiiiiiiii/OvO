@@ -48,8 +48,8 @@ public class ZoomView extends android.support.v7.widget.AppCompatImageView {
 
     //设置初始时候的放大图片位置
     //TODO:需要修改一下,调整到图片中央附近,注意一定是负数!!!!!千万不能写正数
-    private final int startx=-500;
-    private final int starty=-500;
+    private final int startx=-900;
+    private final int starty=-900;
 
 
 
@@ -201,24 +201,24 @@ public class ZoomView extends android.support.v7.widget.AppCompatImageView {
                 midPoint(mid, event);
                 break;
             case MotionEvent.ACTION_MOVE:
-                // drag模式
-                if (mode == DRAG) {
-                    // 设置当前的 matrix
-                    matrix1.set(saveMatrix);
-                    // 平移 当前坐标减去初始坐标 移动的距离
-                    matrix1.postTranslate(event.getX() - x_down, event.getY() - y_down);
-                    //Log.d(TAG, "onTouchEvent: ++++++++++++++++++++++++++++++eventx"+event.getX());
-                    //Log.d(TAG, "onTouchEvent: ++++++++++++++++++++++++++++++eventy"+event.getY());
-                    // 平移
-                    // 判断达到移动标准
-                    flag = checkMatrix(matrix1);
-                    if (flag) {
-                        // 设置matrix
-                        matrix.set(matrix1);
-                        // 调用ondraw重绘
-                        invalidate();
-                    }
-                }
+//                // drag模式
+//                if (mode == DRAG) {
+//                    // 设置当前的 matrix
+//                    matrix1.set(saveMatrix);
+//                    // 平移 当前坐标减去初始坐标 移动的距离
+//                    matrix1.postTranslate(event.getX() - x_down, event.getY() - y_down);
+//                    //Log.d(TAG, "onTouchEvent: ++++++++++++++++++++++++++++++eventx"+event.getX());
+//                    //Log.d(TAG, "onTouchEvent: ++++++++++++++++++++++++++++++eventy"+event.getY());
+//                    // 平移
+//                    // 判断达到移动标准
+//                    flag = checkMatrix(matrix1);
+//                    if (flag) {
+//                        // 设置matrix
+//                        matrix.set(matrix1);
+//                        // 调用ondraw重绘
+//                        invalidate();
+//                    }
+//                }
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
