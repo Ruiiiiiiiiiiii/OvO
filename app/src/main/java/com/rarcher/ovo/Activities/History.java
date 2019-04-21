@@ -73,7 +73,13 @@ public class History extends AppCompatActivity {
                 String date = "2017-07-17";
                 System.out.println("compareToBefore1 : "+date.compareTo("2017-06-16"));
                 * */
-                mCardAdapter.addCardItem(new CardItem(date, context));
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+                Date realdate=new Date(System.currentTimeMillis());
+                String Realdate=simpleDateFormat.format(realdate);
+                if(date.compareTo(Realdate)!=0){
+                    mCardAdapter.addCardItem(new CardItem(date, context));
+                }
+
             }
             while (cursor.moveToNext());
         }
