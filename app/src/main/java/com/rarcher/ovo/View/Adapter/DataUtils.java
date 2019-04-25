@@ -3,6 +3,7 @@ package com.rarcher.ovo.View.Adapter;
 import com.rarcher.ovo.R;
 import com.rarcher.ovo.model.Item;
 
+
 import java.util.ArrayList;
 
 /**
@@ -15,13 +16,14 @@ public class DataUtils {
 
 
         //TODO:
-        itemlist.add(
-                new Item("5", "2", "喵喵喵", "123", "咕咕咕", "123", "2", "1", "Read The World", false, R.drawable.you_define_me, "Rarcher"));
-
-
 
         itemlist.add(
-                new Item("5", "2", "咕咕咕", "456", "喵喵喵", "figure", "2", "1", "时间旅行者", true, R.drawable.cherry, "Rarcher"));
+                new Item("5", "2", "留住真实的自己", "123","喵喵喵", "123", "2", "1", "Read The World", false, R.drawable.timg, "Rarcher"));
+
+
+
+        itemlist.add(
+                new Item("5", "2", "咕咕咕", "456", "嘎嘎嘎", "figure", "2", "1", "时间旅行者", true, R.drawable.timg1, "Rarcher"));
 
 
 
